@@ -4,6 +4,7 @@
   "description": "learning node js ",
   "main": "script.js",
   "scripts": {
+    "start": "node scrpit.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/GauravjangidRam/node_js_learn_code/issues"
   },
-  "homepage": "https://github.com/GauravjangidRam/node_js_learn_code#readme"
+  "homepage": "https://github.com/GauravjangidRam/node_js_learn_code#readme",
+  "dependencies": {
+    "emoji": "^0.3.2",
+    "node-emoji": "^2.1.3"
+  }
 }

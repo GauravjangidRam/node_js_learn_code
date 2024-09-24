@@ -39,3 +39,11 @@ fs.appendFile('text.txt'," What are you doing ,I Hope you are very well ",functi
  });
  server.listen(8080);
  console.log('server started on port 8080');
+
+
+// how to use npm package using emoji for example 
+const emoji = require('node-emoji');
+
+const message = `Hello, World! ${emoji.get('smile')} ${emoji.get('wave')}`;
+
+console.log(message);
