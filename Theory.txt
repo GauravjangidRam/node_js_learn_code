@@ -1,0 +1,10 @@
+// Express js Framework:-
+
+introduction to express js:
+->express js ek npm package hai 
+->framework
+->manage everything form receiving the request and givving the respone
+->express js ek server side framework hai
+
+
+Setting up basic 
