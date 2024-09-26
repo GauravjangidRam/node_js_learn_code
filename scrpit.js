@@ -47,3 +47,4 @@ const emoji = require('node-emoji');
 const message = `Hello, World! ${emoji.get('smile')} ${emoji.get('wave')}`;
 
 console.log(message);
+ 
