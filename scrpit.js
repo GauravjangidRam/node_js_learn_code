@@ -45,5 +45,5 @@ fs.appendFile('text.txt'," What are you doing ,I Hope you are very well ",functi
 const emoji = require('node-emoji');
 
 const message = `Hello, World! ${emoji.get('smile')} ${emoji.get('wave')}`;
-
+//how to print message with emojis
 console.log(message);
