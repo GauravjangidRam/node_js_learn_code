@@ -7,4 +7,14 @@ introduction to express js:
 ->express js ek server side framework hai
 
 
-Setting up basic express 
+Setting up a  basic Express Application
+Rounting
+-->Server ko bar bar stop naa karne ke liye apen "NodeMon" use karte hai 
+nodemon <file_name>
+kise kise computer m ye kam nahi kar ta hai to us ke jageh
+--> npx nodemon scrpit.js
+
+Middle Ware
+->jab bhi server request accect karta hai waha se route ke beech pahuchne tak agar aap us request ko beech me rokte ho and   kuch perform kate ho,to ye element middle ware kehleaata hai 
+->middle ware ko Routes ke phel lgya jaata hai 
+->jab hum kise kam ko routes se phel karna chaahete hai to us kam ko middle ware karta hai.
