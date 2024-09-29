@@ -1,0 +1,28 @@
+->initialize a project with npm 
+-.express install   
+we can create package.json using  [' npm init -y '] is ke ender saare info hote hai aap ke file system ke 
+
+
+dynamic routing 
+how to get data coming from frontend at backend route 
+
+setting up parsers for form 
+
+setting up EJS for EJS  package
+install ejs form npm 
+ set up ejs as a veiw engine
+ - > frontend m jo dekhta hai us ko EJS khate hai 
+  -> EJS is simler to html but hum es m calcution bhi kar skte hai
+settting up public static file
+
+
+dynamic routing
+-->hum log kia bar kuchh routes dekhte ha i unmein sirf ek hi hissa change hota hai 
+--->/author/gaurav
+--->/author/mridul
+
+sabse pahle brower par jaao 
+url likhye apna jo aapko chahiye and enter dabaaiye 
+ab us url route create kariye 
+respone send karo kuch bhi 
+ab usi url ko agar dynamic banaana hai to realise karo konsa part dynamic hai us part ke aage kolne laga do ":";
