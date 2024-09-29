@@ -36,6 +36,10 @@
 
 const express = require('express');
 const apps = express();
+
+apps.use(express.json());
+apps.use(express.urlencoded({extended: true}));
+
 apps.use(function(req,res,next){
   console.log('Request received');
   next();
@@ -56,3 +60,27 @@ apps.use(function(req,res,next){
 
 //  Error heading 
 
+
+
+
+const expres = require('express');
+const hi = expres();
+
+
+hi.use((req,res,next)=>{
+  return  next("helllllll");
+})
+hi.get('/', (req, res) =>{
+  res.send('Hello World');
+});
+
+hi.get('/profile', (req, res) =>{
+  res.send('This is profile section:-------s');
+});
+
+
+hi.use((err, req, res, next)=>{
+  console.log('something is wrong');
+ res.status(500).send('sorrry try again letter:--');
+})
+hi.listen(5500);

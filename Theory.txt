@@ -18,3 +18,14 @@ Middle Ware
 ->jab bhi server request accect karta hai waha se route ke beech pahuchne tak agar aap us request ko beech me rokte ho and   kuch perform kate ho,to ye element middle ware kehleaata hai 
 ->middle ware ko Routes ke phel lgya jaata hai 
 ->jab hum kise kam ko routes se phel karna chaahete hai to us kam ko middle ware karta hai.
+
+form handling and working with the forms
+->handle backend process of form and making sure the data coming form any frontend lib, fw, templates engines. We still handle backend process of form.
+
+session  ||  cookie
+hum log kuchhh bhi data frontend par brower par rakh skte hai and jab bhi aap kuchh bhi request backend par karoge wo fe par saved data automatically backend parpar chla jaayega
+
+ 
+ info encode-: blob is refracne way ke liye use kiya hai 
+
+  tumne to bheja tha plain text par server ko mila blob which is not directly readable ab is cheej ko handdle karna padega ki hum us blob ko waaps se readable kar sake
