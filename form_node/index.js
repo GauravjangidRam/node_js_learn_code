@@ -7,7 +7,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // jo bhi static file hai wo public folder main milege 
 app.use(express.static(path.join(__dirname, 'public')));
-// Correctly set the view engine
+// Correctly set the view engine`
 app.set('view engine', 'ejs');
 
 
