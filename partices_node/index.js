@@ -28,7 +28,7 @@ app.get('/',(req, res)=>{
 // app.listen(3000);
 
 //  File Name show into upper case 
-
+// here to recevie the data using post methoa then use in html and show it.
 app.post('/create', (req, res) => {
   const fileName = req.body.title
     .toLowerCase()
