@@ -13,6 +13,15 @@ app.get('/',(req, res)=>{
         res.render('index',{files:files});
     });
 });
+app.get('/file/:filename', (req, res) => {
+  fs.readFile(`./files/${req.params.filename}`, 'utf-8', (err, fileContent) => {
+      if (err) {
+          return res.status(404).send('File not found');
+      }
+      res.render('show',{fileName:req.params.filename, content:fileContent});
+    });
+});
+
 
 //  File Name show into small case 
 
@@ -44,4 +53,7 @@ app.post('/create', (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('Server is running on port 3000'));
+const PORT = 3000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is running on http://0.0.0.0:${PORT}`);
+});

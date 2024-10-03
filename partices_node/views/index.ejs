@@ -29,7 +29,7 @@
                     <% files.forEach(function(val) { %>
                         <div class="bg-gray-700 p-6 rounded-lg shadow-lg">
                             <h3 class="text-xl font-bold text-gray-100 mb-3"><%= val %></h3>
-                            <a href="#" class="text-blue-400 hover:text-blue-300 transition">Read More...</a>
+                            <a href='/file/<%= val %>' class="text-blue-400 hover:text-blue-300 transition">Read More...</a>
                         </div>
                     <% }); %>
                 <% } else { %>
