@@ -15,9 +15,12 @@ app.set('view engine', 'ejs');
 //     res.render('index');
 // });
 
+// We are using this to dynaimcal making routes We can use mulitple please 
+
 app.get('/life/:username', function (req, res) {
     res.send(`Welcome, ${req.params.username}`);
 });
+
 app.get('/life/:username/:lastname', function (req, res) {
     res.send(`Welcome, ${req.params.username} ${req.params.lastname}`);
 });
