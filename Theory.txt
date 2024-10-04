@@ -29,3 +29,24 @@ hum log kuchhh bhi data frontend par brower par rakh skte hai and jab bhi aap ku
  info encode-: blob is refracne way ke liye use kiya hai 
 
   tumne to bheja tha plain text par server ko mila blob which is not directly readable ab is cheej ko handdle karna padega ki hum us blob ko waaps se readable kar sake
+
+
+
+
+Data Storages:
+asia kuchh jaha par hum saare users ki info store kar skte hai database
+
+Type Of Database _ SQL | NoSQL
+
+->SQL --> data ko ek roop mein rakhna -table 
+->NoSQL --> simller of object work  "mongoDB"
+
+What and Why 
+
+Database -> Collections ->particul ek use rka dat ako dekhna Document
+
+Code                Database
+--------------------------------------------
+mongoose.connect -> data base create
+model create     -> Collections
+Create           -> Document
