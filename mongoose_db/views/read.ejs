@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Smooth hover effect for the image */
+        .user-card img {
+            transition: transform 0.3s ease;
+        }
+
+        .user-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Box shadow and hover effects */
+        .user-card {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .user-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-zinc-800 text-white min-h-screen flex flex-col items-center justify-center">
+
+    <div class="container mx-auto px-4 py-5">
+        <h1 class="text-3xl font-bold mb-8 text-center">All Users</h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Loop through users and display them -->
+            <% if(users.length > 0) { %>
+                <% users.forEach(function(user) { %>
+                    <div class="user-card bg-zinc-900 shadow-lg rounded-lg p-6 flex flex-col items-center space-y-4 max-w-xs w-full">
+                        <img class="w-24 h-24 rounded-full object-cover" src="<%= user.url %>" alt="User Image">
+                        <div class="text-center">
+                            <h2 class="text-xl font-semibold"><%= user.name %></h2>
+                            <p class="text-sm text-zinc-400"><%= user.email %></p>
+                        </div>
+        
+                        <div class="flex space-x-4">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Edit</button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"><a href='/delete/<%= user._id %>'>Delete User</a></button>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-center text-lg">No users found.</p>
+            <% } %>
+        </div>
+
+        <div class="bg-yellow-600 max-w-md px-3 text-center rounded-full fixed top-4 right-4">
+            <a href="/" class="text-white">Go Back Home</a>
+        </div>
+    </div>
+</body>
+</html>
