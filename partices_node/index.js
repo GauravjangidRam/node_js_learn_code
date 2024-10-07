@@ -18,6 +18,7 @@ app.get('/file/:filename', (req, res) => {
       if (err) {
           return res.status(404).send('File not found');
       }
+      
       res.render('show',{fileName:req.params.filename, content:fileContent});
     });
 });
