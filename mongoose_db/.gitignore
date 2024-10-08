@@ -1,0 +1,6 @@
+package.json  
+package-lock.json
+node_modules/.package-lock.json
+gitnode_modules
+partices_node/node_modules/.package-lock.json
+partices_node/node_modules/.package.json
