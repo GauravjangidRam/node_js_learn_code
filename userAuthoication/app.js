@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken');
 const app = express();
 const port = 3000;
 
@@ -60,11 +60,36 @@ app.post('/register', async (req, res) => {
       username,
       password: hashedPassword
     });
-
+    let token = jwt.sign({email},"sercet");
+    res.cookie("token",token);
     await user.save();
     res.redirect('/');
   } catch (err) {
     console.error(err);
     res.status(500).send('Error registering user');
   }
+});
+app.post('/register',(req,res)=>{
+  let user = User.findOne({email: req.body.email});
+  if(!user){
+    return res.status(401).send('Invalid email');
+  }else{
+    bcrypt.compare(req.body.password,user.password,(err,result)=>{
+      if(err) throw err;
+      if(result){
+        let token = jwt.sign({email: user.email});
+        res.cookie("token",token);
+        res.redirect('/dashboard');
+      }
+      else{
+        return res.status(401).send('SomeThing is wrong');
+      }
+
+    });
+  }
+})
+app.get('/logout', (req, res) => {
+  // Clear the cookie by setting its expiration to a past date
+  res.cookie('token', '');
+  res.redirect('/');
 });
