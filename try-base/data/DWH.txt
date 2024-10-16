@@ -1,0 +1,3 @@
+A data warehouse (often abbreviated as DW or DWH) is a system used for reporting and data analysis from various sources to provide business insights. ...
+Once in the data warehouse, the data is ingested, transformed, processed, and made accessible for use in decision-making.
+The three main types of data warehouses are enterprise data warehouse (EDW), operational data store (ODS), and data mart.

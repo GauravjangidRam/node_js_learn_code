@@ -27,7 +27,7 @@ app.get('/create', async (req, res) => {
 
         // If user doesn't exist, create a new one
         let createUser = await userModel.create({
-            name: 'mridul',
+            name: '.kul',
             email: 'mridul@example.com',
             password: 'mridul@0041'
         });

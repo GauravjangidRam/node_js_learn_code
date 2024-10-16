@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .description {
+            display: none; /* Hide the description by default */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8 text-center">My Notes App</h1>
+
+        <!-- Note creation form -->
+        <form action="/notes" method="POST" class="mb-8 bg-white shadow-md rounded px-8 pt-6 pb-8">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                    Title
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" name="title" type="text" placeholder="Enter note title">
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                    Description
+                </label>
+                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" placeholder="Enter note description" rows="4"></textarea>
+            </div>
+            <div class="flex items-center justify-center">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Create Note
+                </button>
+            </div>
+        </form>
+
+        <!-- Display all notes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <% notes.forEach(function(note) { %>
+                <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <h2 class="text-xl font-bold mb-2 cursor-pointer" onclick="toggleDescription(this)">
+                        <%= note.title %>
+                    </h2>
+                    <div class="description text-gray-700 text-base">
+                        <%= note.description %>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <script>
+        function toggleDescription(element) {
+            // Close all other descriptions
+            const allDescriptions = document.querySelectorAll('.description');
+            allDescriptions.forEach(desc => {
+                if (desc !== element.nextElementSibling) {
+                    desc.style.display = 'none'; // Hide other descriptions
+                }
+            });
+
+            // Toggle the clicked description
+            const description = element.nextElementSibling; // Get the next sibling (description div)
+            if (description.style.display === "none" || description.style.display === "") {
+                description.style.display = "block"; // Show description
+            } else {
+                description.style.display = "none"; // Hide description
+            }
+        }
+    </script>
+</body>
+</html>
