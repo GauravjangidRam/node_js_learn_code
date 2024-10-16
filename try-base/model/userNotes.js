@@ -2,10 +2,10 @@ const fs = require('fs');
 const express = require('express');
 const cookie = require('cookie');
 const path = require('path');
-const UserModel = require('./model/user');
+const UserModel = require('./user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const UserNotes = require('./model/userNotes');
+// const UserNotes = require('./model/userNotes');
 
 const app = express();
 app.use(express.json());
@@ -33,23 +33,39 @@ app.get("/notes", (req, res) => {
     const notesDir = path.join(__dirname, 'data');
     const notes = [];
 
-    // Read all files from the directory
+    // Ensure the directory exists
+    if (!fs.existsSync(notesDir)) {
+        return res.status(500).send("Notes directory does not exist.");
+    }
+
+    // Read all files asynchronously from the directory
     fs.readdir(notesDir, (err, files) => {
         if (err) {
             console.log("Error reading directory", err);
             return res.status(500).send("Error loading notes");
         }
 
-        files.forEach(file => {
-            const content = fs.readFileSync(path.join(notesDir, file), 'utf8');
-            notes.push({
-                title: file.replace('.txt', ''), // Remove the .txt extension
-                description: content
+        let fileReads = files.map(file => {
+            return new Promise((resolve, reject) => {
+                fs.readFile(path.join(notesDir, file), 'utf8', (err, content) => {
+                    if (err) reject(err);
+                    resolve({
+                        title: file.replace('.txt', ''), // Remove the .txt extension
+                        description: content
+                    });
+                });
             });
         });
 
-        // Pass the notes array when rendering the page
-        res.render('notes', { notes });
+        // Resolve all file reads and render the notes
+        Promise.all(fileReads)
+            .then(notesArray => {
+                res.render('notes', { notes: notesArray });
+            })
+            .catch(err => {
+                console.log("Error reading files", err);
+                res.status(500).send("Error reading notes");
+            });
     });
 });
 
@@ -88,15 +104,20 @@ const notesDir = path.join(__dirname, 'data'); // Directory for storing notes
 app.post('/notes', (req, res) => {
     const { title, description } = req.body;
 
+    // Check if the title or description is empty or just whitespace
+    if (!title.trim() || !description.trim()) {
+        return res.status(400).send("Title and description cannot be empty or just spaces.");
+    }
+
     // Ensure the directory exists
     if (!fs.existsSync(notesDir)) {
         fs.mkdirSync(notesDir);
     }
 
     // Save the note to a file
-    const filePath = path.join(notesDir, `${title}.txt`);
+    const filePath = path.join(notesDir, `${title.trim()}.txt`);
 
-    fs.writeFile(filePath, description, (err) => {
+    fs.writeFile(filePath, description.trim(), (err) => {
         if (err) {
             console.log("Error saving file:", err);
             return res.status(500).send("Error saving note");
@@ -109,10 +130,8 @@ app.post('/notes', (req, res) => {
 });
 
 // Start the server
-app.listen(3000, (err) => {
-    if (err) {
-        console.log("Error starting server:", err);
-    } else {
-        console.log("Server running on port 3000");
-    }
+const PORT = process.env.PORT || 3001; // Change 3000 to 3001 or another port
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
+
