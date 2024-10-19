@@ -50,3 +50,15 @@ Code                Database
 mongoose.connect -> data base create
 model create     -> Collections
 Create           -> Document
+
+---------------------------------------
+
+Data assiocation 
+ye two type ke hote hai phel mein hum data ko ambind kar karke rhte hai yane same data user ke pass bhi present  hoga or same seller ke pass bhi 
+-> es mein storage aada lete hai 
+->ye jalde se load hota haia 
+
+refrencing 
+-> es me user or seller ek id ko storage karte hai 
+->es m storage kam lgte hai 
+->ye load lene m time lete hai
