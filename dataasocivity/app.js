@@ -24,8 +24,8 @@ app.get('/post', async (req, res) => {
     // If the user exists, push the post into their posts array
     if (user) {
         // Assuming user has an array field called `posts` to store posts
-        user.posts = user.posts || [];
-        user.posts.push(post._id); // store the post's ObjectId, not the whole object
+        user.post = user.post || [];
+        user.post.push(post._id); // store the post's ObjectId, not the whole object
         await user.save();
     }
 
