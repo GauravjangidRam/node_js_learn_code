@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
+    <title>User Registration</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow: hidden; /* Stop scrolling */
+            overflow: hidden;
         }
     </style>
 </head>
-
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white py-6 px-4 rounded-lg shadow-md w-80 relative">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
         <!-- Form Header -->
-        <h2 class="text-xl font-semibold mb-4 text-center text-blue-600">Contact Us</h2>
-        <form action="/create" method="post">
-            <!-- Name Field -->
-            <div class="mb-3">
+        <h2 class="text-2xl font-semibold mb-6 text-center text-blue-600">User Registration</h2>
+        
+        <!-- User Registration Form -->
+        <form action="/register" method="POST">
+            <!-- Username -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700" for="username">Username</label>
+                <input type="text" id="username" name="username"  class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200">
+            </div>
+
+            <!-- Name -->
+            <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
-                <input type="text" id="name" name="name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-1.5 focus:border-blue-400 focus:ring focus:ring-blue-100">
+                <input type="text" id="name" name="name"  class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200">
             </div>
 
-            <!-- Email Field -->
-            <div class="mb-3">
+            <!-- Age -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700" for="age">Age</label>
+                <input type="number" id="age" name="age"  class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700" for="email">Email</label>
-                <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-1.5 focus:border-blue-400 focus:ring focus:ring-blue-100">
+                <input type="email" id="email" name="email"  class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200">
             </div>
 
-            <!-- Password Field -->
-            <div class="mb-3">
+            <!-- Password -->
+            <div class="mb-6">
                 <label class="block text-sm font-medium text-gray-700" for="password">Password</label>
-                <input type="password" id="password" name="password" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-1.5 focus:border-blue-400 focus:ring focus:ring-blue-100">
-            </div>
-
-            <!-- Message Field -->
-            <div class="mb-3">
-                <label class="block text-sm font-medium text-gray-700" for="message">Message</label>
-                <textarea id="message" name="message" required rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-1.5 focus:border-blue-400 focus:ring focus:ring-blue-100"></textarea>
+                <input type="password" id="password" name="password"  class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:border-blue-500 focus:ring focus:ring-blue-200">
             </div>
 
             <!-- Submit Button -->
             <div>
-                <button type="submit" class="w-full bg-blue-600 text-white font-medium py-2 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">Send Message</button>
+                <button type="submit" class="w-full bg-blue-600 text-white font-medium py-2 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300">Register</button>
             </div>
         </form>
     </div>
 </body>
-
 </html>

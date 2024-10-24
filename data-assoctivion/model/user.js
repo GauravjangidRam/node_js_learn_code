@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1.27017/userDefaultData');
-
+mongoose.connect('mongodb://127.0.0.1:27017/MinProjectApp');
 
 const userSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }] // Ensure this is defined correctly
+    username: String,
+    name: String,
+    age: Number,
+    email: String,
+    password: String,
+    post: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'post'
+    }]
 });
 
-const userModel = mongoose.model('User', userSchema);
-module.exports = userModel;
+const user = mongoose.model('user', userSchema);
+
+module.exports = user;
