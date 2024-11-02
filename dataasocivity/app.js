@@ -12,13 +12,10 @@ app.get('/',async(req,res)=>{
     // let post = await postModel.
 });
 app.get('/post', async (req, res) => {
-    // Create a post linked to the user's ObjectId
     let post = await PostModel.create({
         post: "nice product review",
-        userdata: "6713f4d9fe74d5495053de8a" // make sure this is a valid ObjectId of the user
+        userdata: "6713f4d9fe74d5495053de8a"
     });
-
-    // Find the user by their ID
     let user = await userModel.findOne({ _id: "6713f4d9fe74d5495053de8a" });
     
     // If the user exists, push the post into their posts array
