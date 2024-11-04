@@ -4,10 +4,9 @@ const userModel = require('./model/user');
 const postModel = require('./model/post');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
-const multer = require('multer');
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
-const path = require('path'); // Make sure to require 'path'
+const jwt = require('jsonwebtoken');// Make sure to require 'path'
+const upload = require('./config/multerconfig');
+const path = require('path');
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -16,24 +15,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieParser());
 
-// Configure multer storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/images/upload');
-  },
-  filename: function (req, file, cb) {
-    crypto.randomBytes(16, (err, buffer) => {
-      if (err) {
-        return cb(err);
-      }
-      const uniqueSuffix = buffer.toString('hex');
-      const extension = path.extname(file.originalname);
-      cb(null, uniqueSuffix + extension);
-    });
-  }
-});
-
-const upload = multer({ storage: storage });
 
 // Render registration form
 app.get('/', (req, res) => {
@@ -209,7 +190,8 @@ app.get('/logout', (req, res) => {
 });
 
 // Upload Image
-app.get('/files', (req, res) => {
+// es ko dusar file mein bana lege 
+app.get('/profile/upload', (req, res) => {
   res.render('upload');
 });
 
@@ -217,9 +199,9 @@ app.post('/upload', upload.single('file'), (req, res) => {
   console.log(req.file);
 });
 
-app.get('/upload', (req, res) => {
-    res.render('skyshort');
-})
+// app.get('/upload', (req, res) => {
+//     res.render('skyshort');
+// })
 // islogin middleware
 function islogin(req, res, next) {
   const token = req.cookies.token;
