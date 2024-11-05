@@ -195,8 +195,21 @@ app.get('/profile/upload', (req, res) => {
   res.render('upload');
 });
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  console.log(req.file);
+app.post('/upload', islogin, upload.single('image'), async (req, res) => {
+  try {
+    let user = await userModel.findById(req.user.userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    user.profile = req.file.filename; // Save filename as a string
+    await user.save();
+
+    res.redirect('/profile');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Something went wrong while uploading the profile picture');
+  }
 });
 
 // app.get('/upload', (req, res) => {
