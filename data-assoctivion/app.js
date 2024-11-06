@@ -4,17 +4,18 @@ const userModel = require('./model/user');
 const postModel = require('./model/post');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');// Make sure to require 'path'
+const jwt = require('jsonwebtoken');
 const upload = require('./config/multerconfig');
 const path = require('path');
+const { log } = require('console');
 
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(cookieParser());
 
+const DEFAULT_PROFILE_PIC = 'default-profile.jpg';  // Set the default profile image
 
 // Render registration form
 app.get('/', (req, res) => {
@@ -43,7 +44,8 @@ app.post('/register', async (req, res) => {
       name,
       age,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      profile: DEFAULT_PROFILE_PIC  // Set default profile picture
     });
 
     await newUser.save();
@@ -58,6 +60,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
+
 // Login route
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -65,7 +68,7 @@ app.post('/login', async (req, res) => {
   try {
     let existingUser = await userModel.findOne({ email });
     if (!existingUser) {
-      return res.status(400).send('User not found!');
+      return res.status(400).redirect('/login');
     }
 
     const passwordMatch = await bcrypt.compare(password, existingUser.password);
@@ -195,6 +198,8 @@ app.get('/profile/upload', (req, res) => {
   res.render('upload');
 });
 
+
+
 app.post('/upload', islogin, upload.single('image'), async (req, res) => {
   try {
     let user = await userModel.findById(req.user.userId);
@@ -202,9 +207,12 @@ app.post('/upload', islogin, upload.single('image'), async (req, res) => {
       return res.status(404).send('User not found');
     }
 
-    user.profile = req.file.filename; // Save filename as a string
-    await user.save();
-
+    // Save the profile path with the relative URL for frontend access
+    if (req.file) {
+      user.profile = `/images/upload/${req.file.filename}`; // Updated path format
+    }
+    
+    // await user.save();
     res.redirect('/profile');
   } catch (err) {
     console.error(err);
@@ -212,9 +220,9 @@ app.post('/upload', islogin, upload.single('image'), async (req, res) => {
   }
 });
 
-// app.get('/upload', (req, res) => {
-//     res.render('skyshort');
-// })
+app.get('/register', (req, res) => {
+    res.redirect('/');
+})
 // islogin middleware
 function islogin(req, res, next) {
   const token = req.cookies.token;

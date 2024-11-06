@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 
 // Define the upload directory
-const uploadDir = path.join(__dirname, '../public/image/upload');
+const uploadDir = path.join(__dirname, '../public/images/upload');
 
 // Ensure the upload directory exists
 if (!fs.existsSync(uploadDir)) {
